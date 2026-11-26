@@ -1,0 +1,74 @@
+<article
+  class="tarjeta-sonda"
+  [appPulsoAlerta]="!sonda.enLinea"
+  [ngClass]="{
+    'fuera-de-linea': !sonda.enLinea,
+    'en-alerta': bateriaCritica || !sonda.enLinea
+  }"
+>
+  <header class="cabecera-sonda">
+    <div>
+      <span class="id-sonda">{{ sonda.id }}</span>
+      <h3>{{ sonda.nombre | uppercase }}</h3>
+    </div>
+
+    <span class="estado-badge" [ngClass]="sonda.enLinea ? 'online' : 'offline'">
+      {{ sonda.enLinea ? 'EN LÍNEA' : 'FUERA DE LÍNEA' }}
+    </span>
+  </header>
+
+  <div class="destino">
+    <strong>Destino:</strong>
+    @switch (sonda.planetaDestino.toLowerCase()) {
+      @case ('marte') {
+        <span>🔴 {{ sonda.planetaDestino | titlecase }} (Planeta Rojo)</span>
+      }
+      @case ('venus') {
+        <span>🟡 {{ sonda.planetaDestino | titlecase }} (Mundo Volcánico)</span>
+      }
+      @case ('saturno') {
+        <span>🪐 {{ sonda.planetaDestino | titlecase }} (Gigante Anillado)</span>
+      }
+      @case ('júpiter') {
+        <span>🟠 {{ sonda.planetaDestino | titlecase }} (Gigante Gaseoso)</span>
+      }
+      @default {
+        <span>🌌 {{ sonda.planetaDestino | titlecase }}</span>
+      }
+    }
+  </div>
+
+  @if (bateriaCritica) {
+    <div class="aviso-critico">⚠️ BATERÍA CRÍTICA</div>
+  }
+
+  <div class="telemetria">
+    <p>
+      <strong>Batería:</strong>
+      <span [ngStyle]="{ color: bateriaCritica ? '#d32f2f' : 'inherit', 'font-weight': bateriaCritica ? '700' : '500' }">
+        {{ sonda.bateria }}%
+      </span>
+    </p>
+
+    <div class="barra-progreso-bg">
+      <div
+        class="barra-progreso-fill"
+        [ngStyle]="{
+          width: sonda.bateria + '%',
+          backgroundColor: colorBateria
+        }"
+      ></div>
+    </div>
+
+    <p><strong>Distancia:</strong> {{ sonda.distanciaKm | number }} km</p>
+    <p><strong>Retardo de señal:</strong> {{ sonda.distanciaKm | retardoSenal }}</p>
+    <p>
+      <strong>Última transmisión:</strong>
+      {{ sonda.ultimaTransmision | date:'dd/MM/yyyy HH:mm' }}
+    </p>
+  </div>
+
+  <button type="button" class="btn-recarga" (click)="onEnviarRecarga()">
+    Enviar pulso de recarga
+  </button>
+</article>

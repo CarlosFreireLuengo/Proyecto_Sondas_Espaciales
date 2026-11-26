@@ -1,0 +1,34 @@
+<section class="centro-control">
+  <header class="barra-superior">
+    <div>
+      <h1>Centro de Control de Sondas Espaciales</h1>
+      <p class="contador">
+        Sondas conectadas: <strong>{{ sondasConectadasCount }}</strong> / {{ sondas.length }}
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="btn-filtro"
+      [class.activo]="soloAlertas"
+      (click)="toggleFiltroAlertas()"
+    >
+      {{ soloAlertas ? 'Mostrar todas las sondas' : 'Ver solo sondas en alerta' }}
+    </button>
+  </header>
+
+  @if (soloAlertas && sondasFiltradas.length === 0) {
+    <div class="mensaje-nominal">
+      Todos los sistemas nominales. Sin alertas activas.
+    </div>
+  } @else {
+    <div class="grid-sondas">
+      @for (sonda of sondasFiltradas; track sonda.id) {
+        <app-panel-sonda
+          [sonda]="sonda"
+          (recargarSonda)="ejecutarRecargaSolar($event)"
+        />
+      }
+    </div>
+  }
+</section>

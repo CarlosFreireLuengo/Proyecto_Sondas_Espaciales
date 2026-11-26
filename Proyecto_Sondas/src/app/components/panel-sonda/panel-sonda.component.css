@@ -1,0 +1,95 @@
+.tarjeta-sonda {
+  background: #161b26;
+  color: #f0f4f8;
+  border: 1px solid #2d3748;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.tarjeta-sonda.fuera-de-linea {
+  border-style: dashed;
+  opacity: 0.72;
+}
+
+.cabecera-sonda {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.id-sonda {
+  font-size: 0.75rem;
+  color: #90cdf4;
+  font-weight: 700;
+}
+
+.cabecera-sonda h3 {
+  margin: 0.15rem 0 0;
+  font-size: 1.15rem;
+}
+
+.estado-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+}
+
+.estado-badge.online {
+  background: rgba(67, 160, 71, 0.2);
+  color: #81c784;
+}
+
+.estado-badge.offline {
+  background: rgba(229, 57, 53, 0.2);
+  color: #ef9a9a;
+}
+
+.aviso-critico {
+  background: rgba(211, 47, 47, 0.18);
+  border-left: 4px solid #ff5252;
+  color: #ff8a80;
+  padding: 0.45rem 0.65rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.telemetria p {
+  margin: 0.35rem 0;
+  font-size: 0.9rem;
+}
+
+.barra-progreso-bg {
+  width: 100%;
+  height: 10px;
+  background: #2d3748;
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 0.35rem 0 0.6rem;
+}
+
+.barra-progreso-fill {
+  height: 100%;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.btn-recarga {
+  margin-top: auto;
+  padding: 0.6rem 0.9rem;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-recarga:hover {
+  background: #1d4ed8;
+}
